@@ -55,3 +55,14 @@ release:
 pr:
 	opam publish prepare $(NAME).$(VERSION) $(ARCHIVE)
 	OPAMYES=1 opam publish submit $(NAME).$(VERSION) && rm -rf $(NAME).$(VERSION)
+
+iocamljs:
+	jsoo_mktop -dont-export-unit unix -export-package iocamljs-kernel \
+		-export-package c3 -export-package c3.notebook \
+		-export-package lwt -export-package js_of_ocaml \
+		-jsopt +weak.js -jsopt +toplevel.js -o iocaml.byte
+	cat *.cmis.js \
+		`opam config var lib`/iocamljs-kernel/kernel.js iocaml.js > \
+		iocaml_c3.js
+	-rm -f iocaml.js *.cmis.js
+

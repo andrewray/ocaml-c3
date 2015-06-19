@@ -14,6 +14,13 @@ Library c3
   Modules:            C3
   BuildDepends:       js_of_ocaml,js_of_ocaml.syntax
 
+Library c3_notebook
+  FindLibName:        notebook
+  FindLibParent:      c3
+  Path:               lib
+  Modules:            C3_notebook, C3_notebook_install
+  BuildDepends:       c3, iocamljs-kernel
+
 Executable example
   Path:               example
   MainIs:             main.ml
